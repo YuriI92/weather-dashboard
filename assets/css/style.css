@@ -29,3 +29,22 @@ button {
     border-radius: 5px;
     color: var(--primary);
 }
+
+.search-border {
+    border-bottom: 2px solid #807e7e;
+}
+
+.today-weather {
+    border: 1px solid #7b7c7c;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.forecast {
+    margin: 20px 0;
+}
+
+.day-forecast {
+    padding: 5px;
+    width: 11.5vw;
+}
