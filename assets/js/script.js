@@ -35,17 +35,26 @@ var getWeatherData = function(lat, lon) {
         });
 }
 
+var today = moment().format("M/D/YYYY");
 var temp = "";
 var wind = "";
-var hum = "";
+var humid = "";
 var uvInd = "";
 
 var getCurrentWeather = function(data) {
     temp = data.current.temp;
     wind = data.current.wind_speed;
-    hum = data.current.humidity;
+    humid = data.current.humidity;
     uvInd = data.current.uvi;
-    console.log(temp, wind, hum, uvInd);
+    showCurrentWeather(temp, wind, humid, uvInd);
+}
+
+var showCurrentWeather = function(temp, wind, humid, uvInd) {
+    $("#city-name").text(cityName + " (" + today + ")");
+    $(".today-weather > p > .temp").text(temp);
+    $(".today-weather > p > .wind").text(wind);
+    $(".today-weather > p > .humid").text(humid);
+    $(".today-weather > p > .uvInd").text(uvInd);
 }
 
 getGeoCoord();
