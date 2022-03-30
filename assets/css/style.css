@@ -50,3 +50,9 @@ button {
     color: var(--primary);
     background: #4E5F7B;
 }
+
+.uvInd {
+    padding: 5px 13px;
+    border: none;
+    border-radius: 5px;   
+}
