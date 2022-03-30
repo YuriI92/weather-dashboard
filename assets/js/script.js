@@ -1,12 +1,12 @@
 var apiKey = "78eafed7d2164c2baa5f79827b9117ac";
-
-var cityName = "Toronto";
-var apiLocationUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
+var cityName = $("#city-search").attr("placeholder");
 
 var lat = "";
 var lon = "";
 
-var getGeoCoord = function() {
+var getGeoCoord = function(cityName) {
+    var apiLocationUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
+
     fetch(apiLocationUrl)
     .then(function(response) {
         if (response.ok) {
@@ -74,4 +74,12 @@ var showCurrentWeather = function(icon, iconDesc, temp, wind, humid, uvInd) {
     }
 }
 
-getGeoCoord();
+getGeoCoord(cityName);
+
+$("#search-form").on("click", "button", function() {
+    cityName = $("#city-search").val();
+    getGeoCoord(cityName);
+
+    $("#city-search").val("");
+    $("#city-search").attr("placeholder", cityName);
+});
