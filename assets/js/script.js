@@ -8,16 +8,23 @@ var getGeoCoord = function(cityName) {
     var apiLocationUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
 
     fetch(apiLocationUrl)
-    .then(function(response) {
-        if (response.ok) {
-            response.json().then(function(data) {
-                lat = data[0].lat;
-                lon = data[0].lon;
-                
-                getWeatherData(lat, lon);
-            });
-        }
-    });
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                    if (data[0] == null) {
+                        alert("The city name is invalid. Please enter a valid city name.");
+                        return;
+                    } else {
+                        lat = data[0].lat;
+                        lon = data[0].lon;
+                        
+                        getWeatherData(lat, lon);    
+                    }
+                });
+            } else {
+                alert("The city name is invalid. Please enter a valid city name.");
+            }
+        });
 }
 
 var getWeatherData = function(lat, lon) {
@@ -78,8 +85,13 @@ getGeoCoord(cityName);
 
 $("#search-form").on("click", "button", function() {
     cityName = $("#city-search").val();
-    getGeoCoord(cityName);
+    cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+    console.log(cityName);
 
-    $("#city-search").val("");
-    $("#city-search").attr("placeholder", cityName);
+    if (cityName === "") {
+        window.alert("Please enter a city name.")
+    } else {
+        getGeoCoord(cityName);
+        $("#city-search").val("");
+    }
 });
