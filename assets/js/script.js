@@ -2,13 +2,18 @@
 var apiKey = "78eafed7d2164c2baa5f79827b9117ac";
 var cityName = $("#city-search").attr("placeholder");
 
-var lat = "43.6535";
-var lon = "-79.3839";
+// store city location
+var lat = "";
+var lon = "";
 var cityLocation = [];
 
+// load weather dashboard
 var loadDashboard = function() {
+    // get city location saved in local storage
     cityLocation = JSON.parse(localStorage.getItem("cities"));
     
+    // get default weather data and load city search history
+    getGeoCoord(cityName);
     getWeatherData(lat, lon);
     showHistories();
 }
@@ -32,17 +37,6 @@ var getGeoCoord = function(cityName) {
                     } else {
                         lat = data[0].lat;
                         lon = data[0].lon;
-                        
-                        getWeatherData(lat, lon);
-
-                        var tempoLocArr = {
-                            city: cityName,
-                            latitude: lat,
-                            longitude: lon
-                        }
-
-                        cityLocation.push(tempoLocArr);
-                        localStorage.setItem("cities", JSON.stringify(cityLocation));
                     }
                 });
             } else {
@@ -64,8 +58,8 @@ var getWeatherData = function(lat, lon) {
             if (response.ok) {
                 response.json()
                     .then(function(data) {
-                        getCurrentData(data);
-                        showForecastData(data);
+                        showCurrentWeather(data);
+                        showForecast(data);
                         showHistories();
                     });
             } else {
@@ -78,9 +72,8 @@ var getWeatherData = function(lat, lon) {
 var today = moment().format("M/D/YYYY");
 var weatherCond = {};
 
-//　store weather data in the weatherCond array
-var getCurrentData = function(data) {
-    console.log(data);
+// show current weather in the dashboard
+var showCurrentWeather = function(data) {
     // store current weather data in an array
     weatherCond = {
         icon: data.current.weather[0].icon,
@@ -91,11 +84,6 @@ var getCurrentData = function(data) {
         uvInd: data.current.uvi
     }
 
-    showCurrentWeather(weatherCond);
-}
-
-// show current weather in the dashboard
-var showCurrentWeather = function(weatherCond) {
     // set city name and today's date
     $("#city-name").text(cityName + " (" + today + ")");
 
@@ -120,7 +108,8 @@ var showCurrentWeather = function(weatherCond) {
     }
 }
 
-var showForecastData = function(data) {
+// 
+var showForecast = function(data) {
     console.log(data);
 
     if ($(".day-forecast")) {
@@ -192,15 +181,34 @@ $("#search-form").on("click", "button", function() {
         window.alert("Please enter a city name.")
     // if the city name is entered, get weather data of the city
     } else {
+        // get geological location
         getGeoCoord(cityName);
+
+        // store retrieved location
+        var tempoLocArr = {
+            city: cityName,
+            latitude: lat,
+            longitude: lon
+        }
+
+        // store them in city location array and save it in local storage
+        cityLocation.push(tempoLocArr);
+        localStorage.setItem("cities", JSON.stringify(cityLocation));
+
+        // get weather data and show results
+        getWeatherData(lat, lon);
+
         // clear the input after the result is displayed
         $("#city-search").val("");
     }
 });
 
+// get weather conditions of the city clicked
 $("#history-container").on("click", "button", function() {
+    // get city name
     cityName = $(this).text().trim();
 
+    // get geological location of the city from local storage
     for (var i = 0; i < cityLocation.length; i++) {
         if (cityLocation[i].city === cityName) {
             lat = cityLocation[i].latitude;
@@ -208,5 +216,7 @@ $("#history-container").on("click", "button", function() {
         }
     }
 
-    getWeatherData(lat, lon);
+    // get weather conditions and show results
+    showCurrentWeather(data);
+    showForecast(data);
 });
