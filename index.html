@@ -15,61 +15,50 @@
     </header>
 
     <main class="row">
-        <section class="col-4">
-            <div class="search-border">
+        <!-- Search Form and History -->
+        <section class="col-sm-4">
+            <!-- Search Form -->
+            <div class="search-border" id="search-form">
                 <h2>Search for a City:</h2>
                 <form>
                     <label for="city-search"></label>
-                    <input type="text" name="city-search" id="city-search" placeholder="San Diego" />
+                    <input type="text" name="city-search" id="city-search" placeholder="New York" />
                 </form>
                 <button type="submit">Search</button>
             </div>
-            <div id="history-container"></div>
+
+            <!-- History -->
+            <div id="history-container">
+
+            </div>
         </section>
-        <section class="col-8">
+
+        <!-- Weather Result -->
+        <section class="col-sm-8">
+            <!-- Current -->
             <article class="today-weather">
-                <h2 id="city-name"></h2>
-                <p id="temp">Temp: </p>
-                <p id="wind">Wind: </p>
-                <p id="humid">Humidity: </p>
-                <p id="uv">UV Index: </p>
+                <div>
+                    <h2 id="city-name" class="d-inline"></h2>
+                    <img class="d-inline current-weather-icon"/>
+                </div>
+                <p>Temp: <span class="temp"></span> &#8451;</p>
+                <p>Wind: <span class="wind"></span> m/s</p>
+                <p>Humidity: <span class="humid"></span> &percnt;</p>
+                <p>UV Index: <span class="uvInd"></span></p>
             </article>
+
+            <!-- 5-Day Forecast -->
             <article class="forecast">
                 <h3>5-Day Forecast:</h3>
-                <div id="forecast-container" class="d-flex flex-wrap justify-content-between">
-                    <div class="day-forecast">
-                        <p>3/31/2021</p>
-                        <p id="temp">Temp: </p>
-                        <p id="wind">Wind: </p>
-                        <p id="humid">Humidity: </p>
-                    </div>
-                    <div class="day-forecast">
-                        <p>3/31/2021</p>
-                        <p id="temp">Temp: </p>
-                        <p id="wind">Wind: </p>
-                        <p id="humid">Humidity: </p>
-                    </div>
-                    <div class="day-forecast">
-                        <p>3/31/2021</p>
-                        <p id="temp">Temp: </p>
-                        <p id="wind">Wind: </p>
-                        <p id="humid">Humidity: </p>
-                    </div>
-                    <div class="day-forecast">
-                        <p>3/31/2021</p>
-                        <p id="temp">Temp: </p>
-                        <p id="wind">Wind: </p>
-                        <p id="humid">Humidity: </p>
-                    </div>
-                    <div class="day-forecast">
-                        <p>3/31/2021</p>
-                        <p id="temp">Temp: </p>
-                        <p id="wind">Wind: </p>
-                        <p id="humid">Humidity: </p>
-                    </div>
+                <div id="forecast-container" class="forecast-container">
+
                 </div>
             </article>
         </section>
     </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
