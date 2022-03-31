@@ -16,7 +16,7 @@
 
     <main class="row">
         <!-- Search Form and History -->
-        <section class="col-4">
+        <section class="col-sm-4">
             <!-- Search Form -->
             <div class="search-border" id="search-form">
                 <h2>Search for a City:</h2>
@@ -34,11 +34,12 @@
         </section>
 
         <!-- Weather Result -->
-        <section class="col-8">
+        <section class="col-sm-8">
             <!-- Current -->
             <article class="today-weather">
                 <div>
-                    <h2 id="city-name" class="d-inline"></h2><img class="d-inline"/>
+                    <h2 id="city-name" class="d-inline"></h2>
+                    <img class="d-inline current-weather-icon"/>
                 </div>
                 <p>Temp: <span class="temp"></span> &#8451;</p>
                 <p>Wind: <span class="wind"></span> m/s</p>
@@ -49,7 +50,7 @@
             <!-- 5-Day Forecast -->
             <article class="forecast">
                 <h3>5-Day Forecast:</h3>
-                <div id="forecast-container" class="d-flex flex-wrap justify-content-between">
+                <div id="forecast-container" class="forecast-container">
 
                 </div>
             </article>

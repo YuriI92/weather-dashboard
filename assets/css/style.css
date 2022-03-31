@@ -42,6 +42,10 @@ button {
     margin: 5px 0;
 }
 
+.current-weather-icon {
+    vertical-align: top;
+}
+
 img {
     filter: drop-shadow(2px 2px 2px rgb(0, 0, 0, 0.4));
 }
@@ -50,18 +54,28 @@ img {
     margin: 20px 0;
 }
 
+.forecast-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .day-forecast {
     padding: 5px;
     width: 11.5vw;
     color: var(--primary);
-    background: #4E5F7B;
+    background: #687899;
+}
+
+.forecast-date {
+    margin-bottom: 0;
 }
 
 .uvInd {
     padding: 5px 13px;
     border: none;
     border-radius: 5px;   
-    font-size: 1.7vw;
+    font-size: 13px;
 }
 
 .city-search-btn {
@@ -73,4 +87,15 @@ img {
 .city-search-btn:hover {
     background-color: var(--secondary);
     color: var(--primary);
+}
+
+@media screen and (max-width: 575px) {
+    #forecast-container {
+        display: block;
+    }
+
+    .day-forecast {
+        width: 90vw;
+        margin: 0 auto 10px auto;
+    }
 }
