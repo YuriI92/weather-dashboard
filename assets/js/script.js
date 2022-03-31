@@ -2,8 +2,16 @@
 var apiKey = "78eafed7d2164c2baa5f79827b9117ac";
 var cityName = $("#city-search").attr("placeholder");
 
-var lat = "";
-var lon = "";
+var lat = "43.6535";
+var lon = "-79.3839";
+var cityLocation = [];
+
+var loadDashboard = function() {
+    cityLocation = JSON.parse(localStorage.getItem("cities"));
+    
+    getWeatherData(lat, lon);
+    showHistories();
+}
 
 // get geological coordinate
 var getGeoCoord = function(cityName) {
@@ -25,7 +33,16 @@ var getGeoCoord = function(cityName) {
                         lat = data[0].lat;
                         lon = data[0].lon;
                         
-                        getWeatherData(lat, lon);    
+                        getWeatherData(lat, lon);
+
+                        var tempoLocArr = {
+                            city: cityName,
+                            latitude: lat,
+                            longitude: lon
+                        }
+
+                        cityLocation.push(tempoLocArr);
+                        localStorage.setItem("cities", JSON.stringify(cityLocation));
                     }
                 });
             } else {
@@ -49,6 +66,7 @@ var getWeatherData = function(lat, lon) {
                     .then(function(data) {
                         getCurrentData(data);
                         showForecastData(data);
+                        showHistories();
                     });
             } else {
                 window.alert("Sorry. No data found for " + cityName + ". Try other city.");
@@ -144,8 +162,23 @@ var showForecastData = function(data) {
     }
 }
 
+var showHistories = function() {
+    console.log(cityLocation);
+    if ($(".city-search-btn")) {
+        $(".city-search-btn").detach();
+    } 
+
+    for (var i = 0; i < cityLocation.length; i++) {
+        var cityBtnEl = $("<button>")
+            .addClass("city-search-btn")
+            .attr("type", "button")
+            .html(cityLocation[i].city);
+        $("#history-container").append(cityBtnEl);
+    }
+}
+
 // get default weather data to display at first
-getGeoCoord(cityName);
+loadDashboard();
 
 // get weather data and display in dashboard when search button is clicked
 $("#search-form").on("click", "button", function() {
