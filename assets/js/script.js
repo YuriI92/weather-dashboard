@@ -14,8 +14,6 @@ var loadDashboard = function() {
     
     // get default weather data and load city search history
     getGeoCoord(cityName);
-    getWeatherData(lat, lon);
-    showHistories();
 }
 
 // get geological coordinate
@@ -37,6 +35,8 @@ var getGeoCoord = function(cityName) {
                     } else {
                         lat = data[0].lat;
                         lon = data[0].lon;
+
+                        getWeatherData(lat, lon);
                     }
                 });
             } else {
@@ -217,6 +217,5 @@ $("#history-container").on("click", "button", function() {
     }
 
     // get weather conditions and show results
-    showCurrentWeather(data);
-    showForecast(data);
+    getWeatherData(lat, lon);
 });
