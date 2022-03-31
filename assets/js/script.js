@@ -197,3 +197,16 @@ $("#search-form").on("click", "button", function() {
         $("#city-search").val("");
     }
 });
+
+$("#history-container").on("click", "button", function() {
+    cityName = $(this).text().trim();
+
+    for (var i = 0; i < cityLocation.length; i++) {
+        if (cityLocation[i].city === cityName) {
+            lat = cityLocation[i].latitude;
+            lon = cityLocation[i].longitude;
+        }
+    }
+
+    getWeatherData(lat, lon);
+});
