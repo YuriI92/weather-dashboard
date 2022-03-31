@@ -102,6 +102,62 @@ var showCurrentWeather = function(weatherCond) {
     }
 }
 
+var getForecastData = function(data) {
+    console.log(data);
+
+    var tempoArr = {};
+
+    for (var i = 0; i < 5; i++) {
+        console.log(data.daily[i].temp);
+
+        var forecastData = {
+            date: moment(today).add(i + 1, "d").format("M/D/YYYY"),
+            icon: data.daily[i].weather[0].icon,
+            iconDesc: data.daily[i].weather[0].description,
+            temp: data.daily[i].temp.day,
+            wind: data.daily[i].wind_speed,
+            humid: data.daily[i].humidity,
+        }
+
+        var dayContainerEl = $("<div>")
+            .addClass("day-forecast");
+
+        console.log(tempoArr);
+
+        var dateEl = $("<p>")
+            .addClass("forecast-date font-weight-bold")
+            .html(forecastData.date);
+        var iconEl = $("<img>")
+            .addClass("weather-icon")
+            .attr("src", "http://openweathermap.org/img/wn/" + forecastData.icon + ".png")
+            .attr("alt", forecastData.iconDesc);
+        var tempEl = $("<p>")
+            .addClass("temp")
+            .html("Temp: " + forecastData.temp + " &#8451;");
+        var windEl = $("<p>")
+            .addClass("wind")
+            .html("Wind: " + forecastData.wind + " m/s");
+        var humidEl = $("<p>")
+            .addClass("humid")
+            .html("Humidity: " + forecastData.humid + " &percnt;");
+
+        dayContainerEl.append(dateEl, iconEl, tempEl, windEl, humidEl);
+        $("#forecast-container").append(dayContainerEl);
+    }
+
+    // store current weather data in an array
+    // weatherCond = {
+    //     icon: data.current.weather[0].icon,
+    //     iconDesc: data.current.weather[0].description,
+    //     temp: data.current.temp,
+    //     wind: data.current.wind_speed,
+    //     humid: data.current.humidity,
+    //     uvInd: data.current.uvi
+    // }
+
+    // showCurrentWeather(weatherCond);
+}
+
 // get default weather data to display at first
 getGeoCoord(cityName);
 
