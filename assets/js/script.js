@@ -11,7 +11,11 @@ var cityLocation = [];
 var loadDashboard = function() {
     // get city location saved in local storage
     cityLocation = JSON.parse(localStorage.getItem("cities"));
-    
+
+    if (cityLocation === null) {
+        cityLocation = [];
+    }
+
     // get default weather data and load city search history
     getGeoCoord(cityName);
 }
@@ -155,14 +159,16 @@ var showHistories = function() {
     console.log(cityLocation);
     if ($(".city-search-btn")) {
         $(".city-search-btn").detach();
-    } 
+    }
 
-    for (var i = 0; i < cityLocation.length; i++) {
-        var cityBtnEl = $("<button>")
-            .addClass("city-search-btn")
-            .attr("type", "button")
-            .html(cityLocation[i].city);
-        $("#history-container").append(cityBtnEl);
+    if (cityLocation !== null) {
+        for (var i = 0; i < cityLocation.length; i++) {
+            var cityBtnEl = $("<button>")
+                .addClass("city-search-btn")
+                .attr("type", "button")
+                .html(cityLocation[i].city);
+            $("#history-container").append(cityBtnEl);
+        }
     }
 }
 
