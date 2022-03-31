@@ -1,5 +1,7 @@
 :root {
     --primary: #FFFFFF;
+    --secondary: #03ABFD;
+    --light-border: #7b7c7c;
 }
 
 header {
@@ -16,7 +18,7 @@ main {
 #city-search {
     padding: 5px 8px;
     width: 30vw;
-    border: 1px solid #7b7c7c;
+    border: 1px solid var(--light-border);
     border-radius: 5px;
 }
 
@@ -24,7 +26,7 @@ button {
     margin: 15px 4px;
     padding: 5px;
     width: 30vw;
-    background: #03ABFD;
+    background: var(--secondary);
     border: none;
     border-radius: 5px;
     color: var(--primary);
@@ -35,7 +37,7 @@ button {
 }
 
 .today-weather {
-    border: 1px solid #7b7c7c;
+    border: 1px solid var(--light-border);
     padding: 5px;
     margin: 5px 0;
 }
@@ -56,4 +58,15 @@ button {
     border: none;
     border-radius: 5px;   
     font-size: 1.7vw;
+}
+
+.city-search-btn {
+    margin-bottom: 0;
+    background-color: #bbbbbb;
+    color: black;
+}
+
+.city-search-btn:hover {
+    background-color: var(--secondary);
+    color: var(--primary);
 }
