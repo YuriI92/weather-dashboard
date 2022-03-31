@@ -48,7 +48,7 @@ var getWeatherData = function(lat, lon) {
                 response.json()
                     .then(function(data) {
                         getCurrentData(data);
-                        getForecastData(data);
+                        showForecastData(data);
                     });
             } else {
                 window.alert("Sorry. No data found for " + cityName + ". Try other city.");
@@ -102,16 +102,16 @@ var showCurrentWeather = function(weatherCond) {
     }
 }
 
-var getForecastData = function(data) {
+var showForecastData = function(data) {
     console.log(data);
 
-    var tempoArr = {};
+    if ($(".day-forecast")) {
+        $(".day-forecast").detach();
+    }
 
     for (var i = 0; i < 5; i++) {
-        console.log(data.daily[i].temp);
-
         var forecastData = {
-            date: moment(today).add(i + 1, "d").format("M/D/YYYY"),
+            date: moment().add(i + 1, "d").format("M/D/YYYY"),
             icon: data.daily[i].weather[0].icon,
             iconDesc: data.daily[i].weather[0].description,
             temp: data.daily[i].temp.day,
@@ -121,8 +121,6 @@ var getForecastData = function(data) {
 
         var dayContainerEl = $("<div>")
             .addClass("day-forecast");
-
-        console.log(tempoArr);
 
         var dateEl = $("<p>")
             .addClass("forecast-date font-weight-bold")
@@ -144,18 +142,6 @@ var getForecastData = function(data) {
         dayContainerEl.append(dateEl, iconEl, tempEl, windEl, humidEl);
         $("#forecast-container").append(dayContainerEl);
     }
-
-    // store current weather data in an array
-    // weatherCond = {
-    //     icon: data.current.weather[0].icon,
-    //     iconDesc: data.current.weather[0].description,
-    //     temp: data.current.temp,
-    //     wind: data.current.wind_speed,
-    //     humid: data.current.humidity,
-    //     uvInd: data.current.uvi
-    // }
-
-    // showCurrentWeather(weatherCond);
 }
 
 // get default weather data to display at first
