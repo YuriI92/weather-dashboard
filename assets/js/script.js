@@ -23,7 +23,7 @@ var loadDashboard = function() {
 // get geological coordinate
 var getGeoCoord = function(cityName) {
     // store api url to get geological coordinate of the city
-    var apiLocationUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
+    var apiLocationUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
 
     // get location data from api url
     fetch(apiLocationUrl)
