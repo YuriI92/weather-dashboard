@@ -5,11 +5,11 @@ This is a simple weather dashboard for travel lovers. You can check the weather 
 
 ## Description
 * When you enter city name and click search button, current weather conditions and 5-day forecast of the city will be displayed.<br/>
-    ![alt text](./assets/images/screenshot_02_search-form)
-    ![alt text](./assets/images/screenshot_02_search-result)
+    ![alt text](./assets/images/screenshot_02_search-form.png)
+    ![alt text](./assets/images/screenshot_02_search-result.png)
 * Searched cities will be added below the search form and you can view current weather conditions and 5-day forecast by clicking the city.<br/>
-    ![alt text](./assets/images/screenshot_03_search-history)
-    ![alt text](./assets/images/screenshot_03_search-history-result)
+    ![alt text](./assets/images/screenshot_03_search-history.png)
+    ![alt text](./assets/images/screenshot_03_search-history-result.png)
 * For current weather conditions, the following items will be displayed:
     1. City Name
     2. Date
@@ -19,7 +19,7 @@ This is a simple weather dashboard for travel lovers. You can check the weather 
     6. Humidity
     7. UV Index (Favorable: Green, moderate: orange, severe: red)<br/>
 
-    ![alt text](./assets/images/screenshot_04_current-weather)
+    ![alt text](./assets/images/screenshot_04_current-weather.png)
 * For 5-day forecast, the following items will be displayed:
     1. Date
     2. Icon representing Weather Condition
@@ -27,7 +27,7 @@ This is a simple weather dashboard for travel lovers. You can check the weather 
     4. Wind Speed
     5. Humidity<br/>
 
-    ![alt text](./assets/images/screenshot_05_forecast-weather)
+    ![alt text](./assets/images/screenshot_05_forecast-weather.png)
 
 ## Built With
 * HTML
@@ -39,7 +39,7 @@ This is a simple weather dashboard for travel lovers. You can check the weather 
 
 ## Website
 https://yurii92.github.io/weather-dashboard-by-yuri/<br/>
-![alt text](./assets/images/screenshot_01_main)
+![alt text](./assets/images/screenshot_01_main.png)
 
 ## Contribution
 Made with ❤️ by Yuri Ichikawa
