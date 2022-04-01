@@ -36,7 +36,7 @@ This is a simple weather dashboard for travel lovers. You can check the weather 
 * jQuery
 
 ## Website
-https://yurii92.github.io/<br/>
+https://yurii92.github.io/weather-dashboard-by-yuri/<br/>
 ![alt text](./assets/images/)
 
 ## Contribution
