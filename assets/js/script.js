@@ -6,6 +6,7 @@ var cityName = $("#city-search").attr("placeholder");
 var lat = "";
 var lon = "";
 var cityLocation = [];
+var tempoLocArr = {};
 
 // load weather dashboard
 var loadDashboard = function() {
@@ -37,10 +38,17 @@ var getGeoCoord = function(cityName) {
                         return;
                     // if the data is valid, get latitude and longitude to get weather data
                     } else {
-                        lat = data[0].lat;
-                        lon = data[0].lon;
+                        tempoLocArr = {
+                            city: cityName,
+                            latitude: data[0].lat,
+                            longitude: data[0].lon
+                        }
 
-                        getWeatherData(lat, lon);
+                        // store them in city location array and save it in local storage
+                        cityLocation.push(tempoLocArr);
+                        localStorage.setItem("cities", JSON.stringify(cityLocation));
+
+                        getWeatherData(tempoLocArr.latitude, tempoLocArr.longitude);
                     }
                 });
             } else {
@@ -112,15 +120,16 @@ var showCurrentWeather = function(data) {
     }
 }
 
-// 
+// show 5-day forecast data
 var showForecast = function(data) {
-    console.log(data);
-
+    // if there is day-forecast class elements, remove them
     if ($(".day-forecast")) {
         $(".day-forecast").detach();
     }
 
+    // create 5-day forecast data elements
     for (var i = 0; i < 5; i++) {
+        // store forecast data in an array
         var forecastData = {
             date: moment().add(i + 1, "d").format("M/D/YYYY"),
             icon: data.daily[i].weather[0].icon,
@@ -130,9 +139,11 @@ var showForecast = function(data) {
             humid: data.daily[i].humidity,
         }
 
+        // create container element
         var dayContainerEl = $("<div>")
             .addClass("day-forecast");
 
+        // create each data element
         var dateEl = $("<p>")
             .addClass("forecast-date font-weight-bold")
             .html(forecastData.date);
@@ -155,12 +166,14 @@ var showForecast = function(data) {
     }
 }
 
+// show histories of searched cities with a button
 var showHistories = function() {
-    console.log(cityLocation);
+    // if there are city-search-btn class elements, remove them
     if ($(".city-search-btn")) {
         $(".city-search-btn").detach();
     }
 
+    // if cityLocation array has data, create city search button elements until the end of array data
     if (cityLocation !== null) {
         for (var i = 0; i < cityLocation.length; i++) {
             var cityBtnEl = $("<button>")
@@ -190,20 +203,6 @@ $("#search-form").on("click", "button", function() {
         // get geological location
         getGeoCoord(cityName);
 
-        // store retrieved location
-        var tempoLocArr = {
-            city: cityName,
-            latitude: lat,
-            longitude: lon
-        }
-
-        // store them in city location array and save it in local storage
-        cityLocation.push(tempoLocArr);
-        localStorage.setItem("cities", JSON.stringify(cityLocation));
-
-        // get weather data and show results
-        getWeatherData(lat, lon);
-
         // clear the input after the result is displayed
         $("#city-search").val("");
     }
@@ -219,6 +218,7 @@ $("#history-container").on("click", "button", function() {
         if (cityLocation[i].city === cityName) {
             lat = cityLocation[i].latitude;
             lon = cityLocation[i].longitude;
+            break;
         }
     }
 
